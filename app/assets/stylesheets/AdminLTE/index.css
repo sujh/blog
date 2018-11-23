@@ -1,5 +1,8 @@
 /*
  *= require ./bootstrap
  * require ./bootstrap-theme
+ *= require ./font-awesome
+ *= require ./ionicons.min
  *= require ./AdminLTE
+ *= require ./skin-blue.min
 */

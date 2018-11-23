@@ -1,0 +1,32 @@
+<aside class="main-sidebar">
+  <section class="sidebar">
+    <div class="user-panel">
+      <div class="pull-left image">
+      </div>
+
+      <div class="pull-left info">
+        <p></p>
+      </div>
+    </div>
+
+    <%= form_tag('#', class: 'sidebar-form') do %>
+      <div class="input-group">
+        <%= text_field_tag('search', nil, placeholder: 'Search...', class: 'form-control') %>
+        <span class="input-group-btn">
+          <%= button_tag('', class: 'btn btn-flat') do %>
+            <i class="fa fa-search"></i>
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+
+    <ul class="sidebar-menu tree" data-widget="tree">
+      <li>
+        <%= link_to(posts_path) do %>
+          <i class="fa fa-book"></i>
+          <span>Posts</span>
+        <% end %>
+      </li>
+    </ul>
+  </section>
+</aside>

@@ -7,22 +7,28 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="skin-blue sidebar-mini sidebar-collapse">
-  <% if flash[:success] %>
-    <div class="alert alert-success alert-dismissible">
-      <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
-      <%= flash[:success] %>
-    </div>
-  <% end %>
+  <body class="skin-blue sidebar-mini">
+    <div class="wrapper" style="height: auto; min-height: 100%">
+      <% if flash[:success] %>
+        <div class="alert alert-success alert-dismissible">
+          <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
+          <%= flash[:success] %>
+        </div>
+      <% end %>
 
-  <% if flash[:danger] %>
-    <div class="alert alert-danger alert-dismissible">
-      <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
-      <%= flash[:danger] %>
-    </div>
-  <% end %>
+      <% if flash[:danger] %>
+        <div class="alert alert-danger alert-dismissible">
+          <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
+          <%= flash[:danger] %>
+        </div>
+      <% end %>
 
-  <%= yield %>
+      <%= render 'layouts/header' %>
+      <%= render 'layouts/aside' %>
+      <div class="content-wrapper">
+        <%= yield %>
+      </div>
+    </div>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>
