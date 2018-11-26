@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= Settings.blog_name %></title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body class="skin-blue sidebar-mini">
+  <% if flash[:success] %>
+    <div class="alert alert-success alert-dismissible">
+      <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
+      <%= flash[:success] %>
+    </div>
+  <% end %>
+
+  <% if flash[:danger] %>
+    <div class="alert alert-danger alert-dismissible">
+      <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
+      <%= flash[:danger] %>
+    </div>
+  <% end %>
+
+  <%= yield %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</body>
+</html>
