@@ -6,10 +6,9 @@ class SessionsController < ApplicationController
     admin = Admin.find_by(name: params[:name])
     if admin && admin.authenticated?(params[:password])
       session[:admin_id] = admin.id
-      flash.now[:success] = 'success'
-      redirect_to new_post_path
+      redirect_to posts_path, notice: 'Success'
     else
-      flash.now[:danger] = 'Failed: name and password do not match'
+      flash.now[:alert] = 'Failed: name and password do not match'
       render :new
     end
   end

@@ -1,0 +1,32 @@
+<div class="col-md-3">
+  <%= link_to('Compose', new_post_path, class: 'btn btn-primary btn-block margin-bottom') %>
+  <div class="box box-solid">
+    <div class="box-header with-border">
+      <h3 class="box-title">
+        Folders
+      </h3>
+    </div>
+    <div class="box-body no-padding">
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <%= link_to(posts_path) do %>
+            <i class="fa fa-file-text-o"></i>
+            文章
+          <% end %>
+        </li>
+        <li>
+          <%= link_to('#') do %>
+            <i class="fa fa-file-text-o"></i>
+            草稿
+          <% end %>
+        </li>
+        <li>
+          <%= link_to('#') do %>
+            <i class="fa fa-trash-o"></i>
+            垃圾箱
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

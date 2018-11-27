@@ -10,19 +10,21 @@
 
   <body class="skin-blue sidebar-mini">
     <div class="wrapper" style="height: auto; min-height: 100%">
-      <% if flash[:success] %>
-        <div class="alert alert-success alert-dismissible">
-          <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
-          <%= flash[:success] %>
-        </div>
-      <% end %>
+      <div style="position:relative; z-index: 1000">
+        <% if flash[:notice] %>
+          <div class="alert alert-success alert-dismissible">
+            <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
 
-      <% if flash[:danger] %>
-        <div class="alert alert-danger alert-dismissible">
-          <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
-          <%= flash[:danger] %>
-        </div>
-      <% end %>
+        <% if flash[:alert] %>
+          <div class="alert alert-danger alert-dismissible">
+            <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
+      </div>
 
       <%= render 'layouts/header' %>
       <%= render 'layouts/aside' %>

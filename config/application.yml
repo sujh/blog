@@ -1,7 +1,7 @@
 default: &default
   admin_subdomain: 'admin'
   default_subdomain: 'www'
-  blog_name: 'spike76'
+  blog_name: 'Spike76'
 
 development:
  <<: *default

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_094704) do
+ActiveRecord::Schema.define(version: 2018_11_23_021626) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name", limit: 20, null: false
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2018_11_21_094704) do
     t.string "job"
     t.string "city"
     t.integer "failed_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content"
+    t.string "tag"
+    t.integer "view_counts", default: 0, null: false
+    t.boolean "completed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
