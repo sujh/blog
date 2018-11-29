@@ -35,11 +35,13 @@
       </div>
     </div>
   </div>
-  <script>
+</section>
+<% content_for :scripts do %>
+  <script type="text/javascript">
     $('#pre-btn').click(function(){
       if($('#pre-area').is(":hidden")){
         $.ajax({
-          url: '<%= preview_post_url(@post) %>',
+          url: '<%= preview_posts_url %>',
           type: 'post',
           data: { content: $('#post_content').val() },
           success: function(data){
@@ -55,4 +57,4 @@
       }
     });
   </script>
-</section>
+<% end %>

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :delete]
 
     resources :posts do
-      post :preview, on: :member
+      post :preview, on: :collection
     end
   end
 
