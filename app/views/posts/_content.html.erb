@@ -19,13 +19,15 @@
 
               <div class="form-group">
                 <%= f.text_area(:content, class: 'form-control', placeholder: 'Content:', rows: 20, required: true) %>
+                <div id="pre-area" style="display: none"></div>
               </div>
             </div>
           </div>
 
           <div class="box-footer">
             <div class="pull-right">
-              <%= f.submit('发布', class: 'btn btn-primary') %>
+              <%= button_tag('预览', type: 'button', class: 'btn btn-info btn-sm', id: 'pre-btn', style: 'cursor: pointer') %>
+              <%= f.submit('完成', class: 'btn btn-primary btn-sm') %>
             </div>
           </div>
         <% end %>
@@ -33,4 +35,24 @@
       </div>
     </div>
   </div>
+  <script>
+    $('#pre-btn').click(function(){
+      if($('#pre-area').is(":hidden")){
+        $.ajax({
+          url: '<%= preview_post_url(@post) %>',
+          type: 'post',
+          data: { content: $('#post_content').val() },
+          success: function(data){
+            $('#pre-btn').toggleClass('disabled');
+            $('#pre-area').html(data).toggle();
+            $('#post_content').toggle();
+          }
+        });
+      } else {
+        $('#pre-btn').toggleClass('disabled');
+        $('#post_content').toggle();
+        $('#pre-area').toggle();
+      }
+    });
+  </script>
 </section>

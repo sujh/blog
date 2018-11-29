@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     get 'sign', to: 'sessions#new'
     resource :session, only: [:create, :delete]
 
-    resources :posts
+    resources :posts do
+      post :preview, on: :member
+    end
   end
 
 end

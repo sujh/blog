@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  skip_before_action :verify_authenticity_token, only: [:preview]
+
   def index
     @posts = Post.order(id: 'desc')
   end
@@ -40,6 +42,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy!
     redirect_to posts_path, notice: 'Success'
+  end
+
+  def preview
+    render plain: MkRenderer.render(params[:content])
   end
 
   private
