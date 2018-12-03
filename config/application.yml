@@ -1,5 +1,5 @@
 default: &default
-  admin_subdomain: 'admin'
+  super_subdomain: 'super'
   default_subdomain: 'www'
   blog_name: 'Spike76'
 

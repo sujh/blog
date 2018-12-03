@@ -10,7 +10,7 @@
           </h3>
         </div>
 
-        <%= form_for(@post) do |f| %>
+        <%= form_for([:super, @post]) do |f| %>
           <div class="box-body">
             <div class="form-group">
               <div class="form-group">
@@ -41,7 +41,7 @@
     $('#pre-btn').click(function(){
       if($('#pre-area').is(":hidden")){
         $.ajax({
-          url: '<%= preview_posts_url %>',
+          url: '<%= preview_super_posts_url %>',
           type: 'post',
           data: { content: $('#post_content').val() },
           success: function(data){

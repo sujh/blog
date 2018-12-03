@@ -5,20 +5,21 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body class="skin-blue sidebar-mini">
-  <% if flash[:success] %>
+  <% if flash[:notice] %>
     <div class="alert alert-success alert-dismissible">
       <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
-      <%= flash[:success] %>
+      <%= flash[:notice] %>
     </div>
   <% end %>
 
-  <% if flash[:danger] %>
+  <% if flash[:alert] %>
     <div class="alert alert-danger alert-dismissible">
       <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
-      <%= flash[:danger] %>
+      <%= flash[:alert] %>
     </div>
   <% end %>
 

@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  constraints subdomain: Settings.admin_subdomain do
-    get 'sign', to: 'sessions#new'
-    resource :session, only: [:create, :delete]
 
-    resources :posts do
-      post :preview, on: :collection
+  constraints subdomain: Settings.super_subdomain do
+    namespace :super, path: nil do
+      controller :sessions do
+        get 'sign' => :new
+        post 'sign' => :create
+        delete 'sign_out' => :destroy
+      end
+
+      resources :posts do
+        post :preview, on: :collection
+      end
     end
   end
 

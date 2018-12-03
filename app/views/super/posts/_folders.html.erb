@@ -1,5 +1,5 @@
 <div class="col-md-3">
-  <%= link_to('Compose', new_post_path, class: 'btn btn-primary btn-block margin-bottom') %>
+  <%= link_to('Compose', new_super_post_path, class: 'btn btn-primary btn-block margin-bottom') %>
   <div class="box box-solid">
     <div class="box-header with-border">
       <h3 class="box-title">
@@ -9,7 +9,7 @@
     <div class="box-body no-padding">
       <ul class="nav nav-pills nav-stacked">
         <li>
-          <%= link_to(posts_path) do %>
+          <%= link_to(super_posts_path) do %>
             <i class="fa fa-file-text-o"></i>
             文章
           <% end %>
