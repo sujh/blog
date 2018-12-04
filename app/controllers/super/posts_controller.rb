@@ -17,6 +17,7 @@ module Super
     end
 
     def create
+      @post = Post.new(post_params)
       if @post.save
         redirect_to super_posts_path, notice: 'Success'
       else
