@@ -9,7 +9,12 @@ Rails.application.routes.draw do
       end
 
       resources :posts do
-        post :preview, on: :collection
+        get :preview, on: :collection
+      end
+
+      resources :post_drafts, only: [:index, :destroy, :edit] do
+        post :publish, on: :member
+        post :preserve, on: :collection
       end
     end
   end

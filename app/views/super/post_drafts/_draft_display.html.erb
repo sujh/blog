@@ -1,0 +1,28 @@
+<div class="box-body no-padding">
+  <div class="mailbox-read-info">
+    <h3><%= draft.title %></h3>
+    <h5>
+      <div class="mailbox-read-time">
+        <%= draft.updated_at.strftime('%Y-%m-%d %H:%M:%S') %>
+      </div>
+    </h5>
+  </div>
+
+  <div class="mailbox-read-message">
+    <%= render_markdown(draft.content) %>
+  </div>
+
+  <div class="box-footer">
+    <div class="pull-right">
+      <%= link_to(edit_super_post_draft_path(draft), class: 'btn btn-primary btn-sm') do %>
+        <i class="fa fa-file-text-o"></i>
+        编辑
+      <% end %>
+
+      <%= link_to(super_post_draft_path(draft), method:'delete', class: 'btn btn-danger btn-sm', data: { confirm: "确认删除：#{draft.title}" }) do %>
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+        删除
+      <% end %>
+    </div>
+  </div>
+</div>

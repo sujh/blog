@@ -4,8 +4,8 @@
 
     <div class="col-md-9">
       <div class="box box-primary">
-        <% @posts.each do |post| %>
-          <%= render partial: 'post_display', locals: { post: post } %>
+        <% @drafts.each do |draft| %>
+          <%= render partial: 'draft_display', locals: { draft: draft } %>
         <% end %>
       </div>
     </div>

@@ -2,14 +2,10 @@ module Super
 
   class PostsController < ApplicationController
 
-    skip_before_action :verify_authenticity_token, only: [:preview]
+    before_action :load_post, only: [:show, :edit, :update, :destroy]
 
     def index
       @posts = Post.order(id: 'desc')
-    end
-
-    def show
-      @post = Post.find(params[:id])
     end
 
     def new
@@ -19,6 +15,7 @@ module Super
     def create
       @post = Post.new(post_params)
       if @post.save
+        clear_draft
         redirect_to super_posts_path, notice: 'Success'
       else
         flash.now[:alert] = "Failed: #{@post.full_error_messages}"
@@ -26,13 +23,9 @@ module Super
       end
     end
 
-    def edit
-      @post = Post.find(params[:id])
-    end
-
     def update
-      @post = Post.find(params[:id])
       if @post.update(post_params)
+        clear_draft
         redirect_to(super_posts_path, notice: 'Success')
       else
         flash.now[:alert] = "Failed: #{@post.full_error_messages}"
@@ -41,7 +34,6 @@ module Super
     end
 
     def destroy
-      @post = Post.find(params[:id])
       @post.destroy!
       redirect_to super_posts_path, notice: 'Success'
     end
@@ -54,6 +46,17 @@ module Super
 
       def post_params
         params.require(:post).permit(:title, :content)
+      end
+
+      def load_post
+        @post = Post.find(params[:id])
+      end
+
+      #若用callback来删除draft，则使用@draft.create_post时会报错，因为在create_post过程中，会删除@draft，再对@draft的外键属性赋值，
+      #但此时@draft已经被删除，各种属性被冻结
+      def clear_draft
+        @draft = @post.draft
+        @draft ? @draft.destroy : PostDraft.find_by(id: params[:post_draft_id])&.destroy
       end
 
   end
