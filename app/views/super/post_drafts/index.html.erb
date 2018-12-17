@@ -7,6 +7,7 @@
         <% @drafts.each do |draft| %>
           <%= render partial: 'draft_display', locals: { draft: draft } %>
         <% end %>
+        <%= paginate @drafts %>
       </div>
     </div>
   </div>

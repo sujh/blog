@@ -5,7 +5,7 @@ module Super
     before_action :load_draft, only: [:edit, :destroy, :publish]
 
     def index
-      @drafts = PostDraft.all
+      @drafts = PostDraft.order('id desc').page(params[:page])
     end
 
     def preserve

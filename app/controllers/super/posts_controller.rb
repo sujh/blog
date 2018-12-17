@@ -5,7 +5,7 @@ module Super
     before_action :load_post, only: [:show, :edit, :update, :destroy]
 
     def index
-      @posts = Post.order(id: 'desc')
+      @posts = Post.order(id: 'desc').page(params[:page])
     end
 
     def new
