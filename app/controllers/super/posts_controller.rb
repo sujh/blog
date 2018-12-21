@@ -2,14 +2,10 @@ module Super
 
   class PostsController < ApplicationController
 
-    before_action :load_post, only: [:show, :edit, :update, :destroy]
+    load_resource only: [:show, :edit, :update, :destroy, :new]
 
     def index
-      @posts = Post.order(id: 'desc').page(params[:page])
-    end
-
-    def new
-      @post = Post.new
+      @posts = Post.undeleted.order(id: 'desc').page(params[:page])
     end
 
     def create
@@ -34,7 +30,7 @@ module Super
     end
 
     def destroy
-      @post.destroy!
+      @post.act_as_deleted
       redirect_to super_posts_path, notice: 'Success'
     end
 
@@ -46,10 +42,6 @@ module Super
 
       def post_params
         params.require(:post).permit(:title, :content)
-      end
-
-      def load_post
-        @post = Post.find(params[:id])
       end
 
       #若用callback来删除draft，则使用@draft.create_post时会报错，因为在create_post过程中，会删除@draft，再对@draft的外键属性赋值，

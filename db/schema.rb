@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_12_04_022859) do
 
-  create_table "admins", force: :cascade do |t|
+  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 20, null: false
     t.string "email", limit: 40
     t.string "password_salted", null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2018_12_04_022859) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "post_drafts", force: :cascade do |t|
+  create_table "post_drafts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.integer "post_id"
@@ -32,11 +32,12 @@ ActiveRecord::Schema.define(version: 2018_12_04_022859) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.string "tag"
     t.integer "view_counts", default: 0, null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.text :content
       t.string :tag
       t.integer :view_counts, default: 0, null: false
+      t.datetime :deleted_at
 
       t.timestamps
     end

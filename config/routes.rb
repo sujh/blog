@@ -12,6 +12,10 @@ Rails.application.routes.draw do
         get :preview, on: :collection
       end
 
+      resources :post_trashes, only: [:index, :destroy] do
+        post :renew, on: :member
+      end
+
       resources :post_drafts, only: [:index, :destroy, :edit] do
         post :publish, on: :member
         post :preserve, on: :collection
