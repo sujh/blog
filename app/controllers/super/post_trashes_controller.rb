@@ -2,7 +2,7 @@ module Super
 
   class PostTrashesController < ApplicationController
 
-    load_resource class: Post, only: [:renew, :destroy]
+    before_action -> { load_resource(class: Post) }, only: [:renew, :destroy]
 
     def index
       @post_trashes = Post.deleted.order(deleted_at: 'desc').page(params[:page])

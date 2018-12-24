@@ -2,7 +2,7 @@ module Super
 
   class PostsController < ApplicationController
 
-    load_resource only: [:show, :edit, :update, :destroy, :new]
+    before_action :load_resource, only: [:show, :edit, :update, :destroy, :new]
 
     def index
       @posts = Post.undeleted.order(id: 'desc').page(params[:page])

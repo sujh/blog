@@ -2,7 +2,7 @@ module Super
 
   class PostDraftsController < ApplicationController
 
-    load_resource instance_name: 'draft', only: [:edit, :destroy, :publish]
+    before_action only: [:edit, :destroy, :publish] { load_resource instance_name: 'draft' }
 
     def index
       @drafts = PostDraft.order('id desc').page(params[:page])
@@ -46,7 +46,6 @@ module Super
             params.require(:post_draft).permit(:title, :content)
           end
       end
-
 
       def create_or_update_post
         @post = @draft.post
