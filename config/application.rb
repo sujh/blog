@@ -17,6 +17,14 @@ module Blog
     # the framework and any gems in your application.
     config.time_zone = 'Beijing'
     config.active_record.default_timezone = :local
+    config.cache_store = :redis_store, {
+      host: 'localhost',
+      port: 6379,
+      db: 0,
+      namespace: '_blog'
+    }, {
+      expires_in: 1.day
+    }
 
   end
 end

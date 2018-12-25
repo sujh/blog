@@ -8,22 +8,31 @@
     </div>
     <div class="box-body no-padding">
       <ul class="nav nav-pills nav-stacked">
-        <li>
+        <li class="<%= active_for(controller: 'posts') %>">
           <%= link_to(super_posts_path) do %>
             <i class="fa fa-inbox"></i>
             文章
+            <span class="label label-primary pull-right">
+              <%= Post.cached_undeleted_count %>
+            </span>
           <% end %>
         </li>
-        <li>
+        <li class="<%= active_for(controller: 'post_drafts') %>">
           <%= link_to(super_post_drafts_path) do %>
             <i class="fa fa-file-text-o"></i>
             草稿
+            <span class="label label-primary pull-right">
+              <%= PostDraft.cached_count %>
+            </span>
           <% end %>
         </li>
-        <li>
+        <li class="<%= active_for(controller: 'post_trashes') %>">
           <%= link_to(super_post_trashes_path) do %>
             <i class="fa fa-trash-o"></i>
             垃圾箱
+            <span class="label label-warning pull-right">
+              <%= Post.cached_deleted_count %>
+            </span>
           <% end %>
         </li>
       </ul>
