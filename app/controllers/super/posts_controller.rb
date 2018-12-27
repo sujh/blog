@@ -11,7 +11,7 @@ module Super
     def create
       @post = Post.new(post_params)
       if @post.save
-        clear_draft
+        PostDraft.find_by(id: params[:post_draft_id]).destroy if params[:post_draft_id].present?
         redirect_to super_posts_path, notice: 'Success'
       else
         flash.now[:alert] = "Failed: #{@post.full_error_messages}"
@@ -21,7 +21,7 @@ module Super
 
     def update
       if @post.update(post_params)
-        clear_draft
+        @post.draft&.destroy
         redirect_to(super_posts_path, notice: 'Success')
       else
         flash.now[:alert] = "Failed: #{@post.full_error_messages}"
@@ -42,13 +42,6 @@ module Super
 
       def post_params
         params.require(:post).permit(:title, :content)
-      end
-
-      #若用callback来删除draft，则使用@draft.create_post时会报错，因为在create_post过程中，会删除@draft，再对@draft的外键属性赋值，
-      #但此时@draft已经被删除，各种属性被冻结
-      def clear_draft
-        @draft = @post.draft
-        @draft ? @draft.destroy : PostDraft.find_by(id: params[:post_draft_id])&.destroy
       end
 
   end
