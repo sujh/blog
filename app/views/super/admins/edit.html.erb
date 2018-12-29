@@ -1,0 +1,114 @@
+<section class="content">
+  <div class="col-md-3">
+    <div class="box box-primary">
+      <div class="box-body box-profile">
+        <h3 class="profile-username text-center">
+          <%= @admin.name %>
+        </h3>
+        <p class="text-muted text-center">
+          <%= @admin.occupation %>
+        </p>
+      </div>
+    </div>
+
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">关于</h3>
+      </div>
+      <div class="box-body">
+        <strong>
+          <i class="fa fa-map-marker margin-r-5">
+            城市
+          </i>
+        </strong>
+        <p class="text-muted"><%= @admin.city %></p>
+        <hr>
+        <strong>
+          <i class="fa fa-bullhorn margin-r-5">
+            简介
+          </i>
+        </strong>
+        <p><%= @admin.introduction %></p>
+        <hr>
+        <strong>
+          <i class="class fa fa-pencil margin-r-5">
+            技能
+          </i>
+        </strong>
+        <p>
+          <% @admin.skill_list.each do |skill| %>
+            <span class="label label-success"><%= skill %></span>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li>
+          <%= link_to('设置', edit_super_admin_path) %>
+        </li>
+        <li>
+          <%= link_to('动态', '#') %>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active">
+          <%= form_with(model: [:super, @admin], local: true, html: { class: 'form-horizontal' }) do |f| %>
+            <div class="form-group">
+              <%= f.label(:name, '名称', class: 'col-sm-2 control-label') %>
+              <div class="col-sm-10">
+                <%= f.text_field(:name, class: 'form-control') %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label(:email, 'email', class: 'col-sm-2 control-label') %>
+              <div class="col-sm-10">
+                <%= f.text_field(:email, class: 'form-control') %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label(:city, '城市', class: 'col-sm-2 control-label') %>
+              <div class="col-sm-10">
+                <%= f.text_field(:city, class: 'form-control') %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label(:occupation, '职业', class: 'col-sm-2 control-label') %>
+              <div class="col-sm-10">
+                <%= f.text_field(:occupation, class: 'form-control') %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label(:introduction, '简介', class: 'col-sm-2 control-label') %>
+              <div class="col-sm-10">
+                <%= f.text_field(:introduction, class: 'form-control') %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label(:skills, '技能', class: 'col-sm-2 control-label') %>
+              <div class="col-sm-10">
+                <%= f.text_field(:skills, class: 'form-control', data: { role: 'tagsinput' }) %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <%= f.submit('提交', class: 'btn btn-primary') %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<% turbolinks_no_cache %>
+<%= javascript_include_tag 'bootstrap-tagsinput', 'data-turbolinks-track': 'reload' %>

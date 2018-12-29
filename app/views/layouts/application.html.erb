@@ -11,6 +11,7 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield :turbolinks_no_cache %>
   </head>
 
   <body class="skin-blue sidebar-mini <%= controller_name %> <%= action_name %>">

@@ -17,9 +17,10 @@ ActiveRecord::Schema.define(version: 2018_12_04_022859) do
     t.string "email", limit: 40
     t.string "password_salted", null: false
     t.string "salt", null: false
-    t.string "job"
+    t.string "occupation"
     t.string "city"
-    t.integer "failed_count", default: 0
+    t.string "skills"
+    t.string "introduction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

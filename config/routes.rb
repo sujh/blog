@@ -20,6 +20,8 @@ Rails.application.routes.draw do
         post :publish, on: :member
         post :preserve, on: :collection
       end
+
+      resource :admin, only: [:edit, :update]
     end
   end
 

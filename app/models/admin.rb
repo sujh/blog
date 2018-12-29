@@ -4,7 +4,8 @@ class Admin < ApplicationRecord
 
   before_create :salt_password
 
-  validates_presence_of :name, :password
+  validates_presence_of :name
+  validates_presence_of :password, on: :create
 
   class << self
 
@@ -16,6 +17,10 @@ class Admin < ApplicationRecord
 
   def authenticated?(str)
     password_salted == Admin.generate_digest(str, salt)
+  end
+
+  def skill_list
+    skills.split(',')
   end
 
   private

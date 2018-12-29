@@ -1,0 +1,27 @@
+module Super
+
+  class AdminsController < ApplicationController
+
+    def edit
+      @admin = current_admin
+    end
+
+    def update
+      @admin = current_admin
+      if @admin.update(admin_params)
+        redirect_to edit_super_admin_path, notice: 'Successs'
+      else
+        flash.now[:alert] = "Failed: #{@admin.full_error_messages}"
+        render :edit
+      end
+    end
+
+    private
+
+      def admin_params
+        params.require(:admin).permit(:name, :email, :city, :introduction, :occupation, :skills)
+      end
+
+  end
+
+end
