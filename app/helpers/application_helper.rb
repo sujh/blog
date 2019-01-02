@@ -10,8 +10,8 @@ module ApplicationHelper
     'active'
   end
 
-  def turbolinks_no_cache
-    content_for :turbolinks_no_cache do
+  def disable_turbolinks_cache
+    content_for :disable_turbolinks_cache do
       content_tag(:meta, nil, name: 'turbolinks-cache-control', content: 'no-cache')
     end
   end
