@@ -5,7 +5,9 @@ module ApplicationHelper
   end
 
   def active_for(**options)
-    'active' if current_page?(options)
+    return '' unless Array(options[:controller]).include?(controller_name)
+    return '' if options[:action] && !Array(options[:action]).include?(action_name)
+    'active'
   end
 
   def turbolinks_no_cache

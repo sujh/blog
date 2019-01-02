@@ -21,14 +21,14 @@
     <% end %>
 
     <ul class="sidebar-menu tree" data-widget="tree">
-      <li>
+      <li class="<%= active_for(controller: %w[posts post_trashes post_drafts]) %>">
         <%= link_to(super_posts_path) do %>
           <i class="fa fa-book"></i>
           <span>Posts</span>
         <% end %>
       </li>
 
-      <li>
+      <li class="<%= active_for(controller: 'admins') %>">
         <%= link_to(edit_super_admin_path) do %>
           <i class="fa fa-user"></i>
           <span>Profile</span>
