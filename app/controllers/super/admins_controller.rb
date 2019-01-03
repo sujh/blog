@@ -19,7 +19,7 @@ module Super
     private
 
       def admin_params
-        params.require(:admin).permit(:name, :email, :city, :introduction, :occupation, :skills)
+        params.require(:admin).permit(:name, :email, :city, :introduction, :occupation, :skills, :avatar)
       end
 
   end

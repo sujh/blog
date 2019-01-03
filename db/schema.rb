@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2018_12_04_022859) do
     t.string "city"
     t.string "skills"
     t.string "introduction"
+    t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

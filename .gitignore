@@ -34,3 +34,6 @@
 .idea
 .ruby-*
 .DS_Store
+
+#public upload files
+public/uploads

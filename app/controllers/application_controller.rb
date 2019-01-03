@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
 
+  helper_method :current_admin
+
   private
 
     def current_admin

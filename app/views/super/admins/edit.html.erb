@@ -2,6 +2,7 @@
   <div class="col-md-3">
     <div class="box box-primary">
       <div class="box-body box-profile">
+        <%= image_tag(@admin.avatar_url, class: 'profile-user-img img-responsive img-circle', alt: 'avatar') %>
         <h3 class="profile-username text-center">
           <%= @admin.name %>
         </h3>
@@ -96,6 +97,13 @@
               <%= f.label(:skills, '技能', class: 'col-sm-2 control-label') %>
               <div class="col-sm-10">
                 <%= f.text_field(:skills, class: 'form-control', data: { role: 'tagsinput' }) %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label(:avatar, '头像', class: 'col-sm-2 control-label') %>
+              <div class="col-sm-10">
+                <%= f.file_field(:avatar, class: 'form-control') %>
               </div>
             </div>
 

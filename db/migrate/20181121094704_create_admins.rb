@@ -1,4 +1,4 @@
-class CreateAdmin < ActiveRecord::Migration[5.2]
+class CreateAdmins < ActiveRecord::Migration[5.2]
   def change
     create_table :admins do |t|
       t.string :name, limit: 20, null: false
@@ -9,6 +9,7 @@ class CreateAdmin < ActiveRecord::Migration[5.2]
       t.string :city, null: true
       t.string :skills, null: true
       t.string :introduction, null: true
+      t.string :avatar, null: true
       t.timestamps
     end
   end

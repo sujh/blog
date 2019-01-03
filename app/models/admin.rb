@@ -4,6 +4,8 @@ class Admin < ApplicationRecord
 
   before_create :salt_password
 
+  mount_uploader :avatar, AvatarUploader
+
   validates_presence_of :name
   validates_presence_of :password, on: :create
 
@@ -20,7 +22,7 @@ class Admin < ApplicationRecord
   end
 
   def skill_list
-    skills.split(',')
+    Array(skills&.split(','))
   end
 
   private
