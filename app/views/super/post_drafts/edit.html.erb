@@ -10,6 +10,7 @@
           </h3>
         </div>
 
+        <%= file_field_tag 'file', id: 'file-upload-field', style: 'display: none' %>
         <%= form_for(@draft, url: publish_super_post_draft_path(@draft), method: :post, html: { id: 'record-form' }) do |f| %>
           <div class="box-body">
             <div class="form-group">
@@ -30,6 +31,9 @@
             </dv>
 
             <div class="pull-right">
+              <a href="javascript:;" id="file-upload-btn" class="btn btn-sm btn-default">
+                图片
+              </a>
               <%= button_tag('预览', type: 'button', class: 'btn btn-info btn-sm', id: 'pre-btn', style: 'cursor: pointer') %>
               <%= f.submit('完成', class: 'btn btn-primary btn-sm') %>
             </div>
@@ -76,5 +80,27 @@
         }
       });
     });
+
+    $('#file-upload-btn').click(function(){
+      $('#file-upload-field').click();
+    });
+
+    $('#file-upload-field').change(function(){
+      var formData = new FormData();
+      formData.append('image', document.getElementById('file-upload-field').files[0]);
+      $.post({
+        url: '<%= photos_path %>',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(rsp){
+          if(rsp['code'] == 100){
+            var img_url = '![](' + rsp['data']['url'] + ')';
+            var $content_area = $('#record-content');
+            $content_area.val($content_area.val() + img_url);
+          }
+        }
+      });
+    })
   </script>
 <% end %>
