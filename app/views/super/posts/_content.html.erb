@@ -10,8 +10,14 @@
           </h3>
         </div>
 
+        <%= file_field_tag 'file', id: 'file-upload-field', style: 'display: none' %>
         <%= form_for([:super, @post], html: { id: 'record-form' }) do |f| %>
           <div class="box-body">
+            <div class="form-group">
+              <a href="javascript:;" id="file-upload-btn">
+                <i class="fa fa-image"></i>
+              </a>
+            </div>
             <div class="form-group">
               <%= f.text_field(:title, class: 'form-control', placeholder: 'Title:', required: true, id: 'record-title') %>
             </div>
@@ -85,5 +91,27 @@
         }
       });
     });
+
+    $('#file-upload-btn').click(function(){
+      $('#file-upload-field').click();
+    });
+
+    $('#file-upload-field').change(function(){
+      var formData = new FormData();
+      formData.append('image', document.getElementById('file-upload-field').files[0]);
+      $.post({
+        url: '<%= photos_path %>',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(rsp){
+          if(rsp['code'] == 100){
+            var img_url = '![](' + rsp['data']['url'] + ')';
+            var $content_area = $('#record-content');
+            $content_area.val($content_area.val() + img_url);
+          }
+        }
+      });
+    })
   </script>
 <% end %>

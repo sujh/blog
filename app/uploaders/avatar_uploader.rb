@@ -5,7 +5,7 @@ class AvatarUploader < BaseUploader
   end
 
   def filename
-    "avatar#{File.extname(original_filename)}" if original_filename.present?
+    "avatar.#{file.extension.downcase}"
   end
 
   process resize_to_fill: [100, 100]
