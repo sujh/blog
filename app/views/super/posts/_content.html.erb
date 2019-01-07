@@ -14,11 +14,6 @@
         <%= form_for([:super, @post], html: { id: 'record-form' }) do |f| %>
           <div class="box-body">
             <div class="form-group">
-              <a href="javascript:;" id="file-upload-btn">
-                <i class="fa fa-image"></i>
-              </a>
-            </div>
-            <div class="form-group">
               <%= f.text_field(:title, class: 'form-control', placeholder: 'Title:', required: true, id: 'record-title') %>
             </div>
 
@@ -37,6 +32,9 @@
             </dv>
 
             <div class="pull-right">
+              <a href="javascript:;" id="file-upload-btn" class="btn btn-sm btn-default">
+                图片
+              </a>
               <%= button_tag('预览', type: 'button', class: 'btn btn-info btn-sm', id: 'pre-btn', style: 'cursor: pointer') %>
               <%= f.submit('完成', class: 'btn btn-primary btn-sm') %>
             </div>
