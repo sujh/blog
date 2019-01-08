@@ -47,25 +47,6 @@
 </section>
 <% content_for :body_scripts do %>
   <script type="text/javascript">
-    $('#pre-btn').click(function () {
-      if ($('#pre-area').is(":hidden")) {
-        $.ajax({
-          url: '<%= preview_super_posts_url %>',
-          type: 'get',
-          data: {content: $('#record-content').val()},
-          success: function (data) {
-            $('#pre-btn').toggleClass('disabled');
-            $('#pre-area').html(data).toggle();
-            $('#record-content').toggle();
-          }
-        });
-      } else {
-        $('#pre-btn').toggleClass('disabled');
-        $('#record-content').toggle();
-        $('#pre-area').toggle();
-      }
-    });
-
     var body = $('body');
     $('#draft-btn').click(function () {
       var data = { title: $('#record-title').val(), content: $('#record-content').val(), draft_id: body.draft_id };
@@ -89,27 +70,5 @@
         }
       });
     });
-
-    $('#file-upload-btn').click(function(){
-      $('#file-upload-field').click();
-    });
-
-    $('#file-upload-field').change(function(){
-      var formData = new FormData();
-      formData.append('image', document.getElementById('file-upload-field').files[0]);
-      $.post({
-        url: '<%= photos_path %>',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(rsp){
-          if(rsp['code'] == 100){
-            var img_url = '![](' + rsp['data']['url'] + ')';
-            var $content_area = $('#record-content');
-            $content_area.val($content_area.val() + img_url);
-          }
-        }
-      });
-    })
   </script>
 <% end %>
