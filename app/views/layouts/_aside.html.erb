@@ -10,9 +10,9 @@
       </div>
     </div>
 
-    <%= form_tag('#', class: 'sidebar-form') do %>
+    <%= form_tag(super_posts_path, method: :get, class: 'sidebar-form') do %>
       <div class="input-group">
-        <%= text_field_tag('search', nil, placeholder: 'Search...', class: 'form-control') %>
+        <%= text_field_tag('q', @query, placeholder: 'Search...', class: 'form-control') %>
         <span class="input-group-btn">
           <%= button_tag('', class: 'btn btn-flat') do %>
             <i class="fa fa-search"></i>
