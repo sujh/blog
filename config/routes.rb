@@ -27,4 +27,8 @@ Rails.application.routes.draw do
 
   resources :photos, only: [:create]
 
+  controller :search do
+    get 'search' => :index
+  end
+
 end

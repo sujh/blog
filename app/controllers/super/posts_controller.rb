@@ -5,12 +5,7 @@ module Super
     before_action :load_resource, only: [:show, :edit, :update, :destroy, :new]
 
     def index
-      @query = params[:q]
-      if @query.present?
-        @posts = Post.search(@query).records.undeleted.page(params[:page])
-      else
-        @posts = Post.undeleted.order(id: 'desc').page(params[:page])
-      end
+      @posts = Post.undeleted.order(id: 'desc').page(params[:page])
     end
 
     def create

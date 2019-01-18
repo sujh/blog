@@ -1,0 +1,37 @@
+<section class="content">
+  <div class="box box-primary">
+    <% if @hits.size.zero? %>
+      <div class="text-center mailbox-controls">
+        <%= "没有关于\"#{@query}\"的查询结果" %>
+      </div>
+    <% else %>
+      <% @hits.each_with_hit do |record, hit| %>
+        <% unless record.deleted_at? %>
+          <div class="box-body no-padding">
+            <div class="mailbox-read-info">
+              <% title = hit.highlight.title&.first || hit.title %>
+              <h4><%= link_to(raw(title), super_post_path(record)) %></h4>
+              <div class="mailbox-read-time">
+                <%= record.updated_at.strftime('%Y-%m-%d') %>
+              </div>
+            </div>
+            <div class="mailbox-read-message">
+              <%= raw hit.highlight.content&.first %>
+            </div>
+            <br>
+          </div>
+        <% end %>
+      <% end %>
+      <%= paginate @hits %>
+    <% end %>
+  </div>
+</section>
+
+<% content_for :body_stylesheets do %>
+  <style>
+    em {
+      color: red;
+      font-style: normal;
+    }
+  </style>
+<% end %>

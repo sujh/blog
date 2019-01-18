@@ -3,13 +3,6 @@ class Post < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  settings do
-    mappings dynamic: 'false' do
-      indexes :title, index: 'not_analyzed'
-      indexes :content, index: 'not_analyzed'
-    end
-  end
-
   CACHE_KEYS = { trashes_num: 'post_trashes_num', posts_num: 'posts_num' }
 
   validates_presence_of :title, :content
@@ -40,6 +33,10 @@ class Post < ApplicationRecord
 
   def renew
     update(deleted_at: nil)
+  end
+
+  def as_indexed_json(options)
+    as_json(only: [:title, :content])
   end
 
   private
