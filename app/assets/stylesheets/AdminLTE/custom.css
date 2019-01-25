@@ -1,0 +1,25 @@
+.cu-height-limit {
+    overflow: hidden;
+    max-height: 800px;
+}
+
+.cu-hide-box {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-image: linear-gradient(180deg, rgba(255,255,255,0) 0%, #fff 65%);
+    height: 100px;
+}
+
+.cu-unfold-btn {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    right: 50%;
+    cursor: pointer;
+}
+
+
+.cu-m-font-size {
+    font-size: 20px;
+}

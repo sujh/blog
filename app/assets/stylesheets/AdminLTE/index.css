@@ -6,4 +6,5 @@
  *= require ./AdminLTE
  *= require ./skin-blue.min
  *= require ./bootstrap-tagsinput
+ *= require ./custom
 */

@@ -8,7 +8,12 @@
     </h5>
   </div>
 
-  <div class="mailbox-read-message">
+  <div class="mailbox-read-message cu-height-limit" style="position: relative">
+    <div class="cu-hide-box">
+      <a class="cu-unfold-btn">
+        <i class="fa fa-angle-double-down cu-m-font-size"></i>
+      </a>
+    </div>
     <%= render_markdown(post.content) %>
   </div>
 
@@ -25,4 +30,5 @@
       <% end %>
     </div>
   </div>
+  <hr style="margin: 0">
 </div>

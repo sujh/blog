@@ -56,5 +56,31 @@ function uploadImage(){
   })
 }
 
-document.addEventListener('turbolinks:load', postPreview);
-document.addEventListener('turbolinks:load', uploadImage);
+function heightLimit(){
+  $('.cu-hide-box').each(function(){
+    var maxHeight = parseInt($(this).parent().css('max-height'));
+    if(this.parentNode.scrollHeight < maxHeight){
+      $(this).hide();
+    }
+  });
+}
+
+function toggleFoldContent(){
+  $('.cu-unfold-btn').click(function(){
+    var $content = $(this).parent().parent();
+    if ($content.hasClass('cu-height-limit')){
+      $content.removeClass('cu-height-limit');
+      $(this).parent().removeClass('cu-hide-box');
+      $(this).children().removeClass('fa-angle-double-down').addClass('fa-angle-double-up');
+    } else {
+      $content.addClass(('cu-height-limit'));
+      $(this).parent().addClass('cu-hide-box');
+      $(this).children().removeClass('fa-angle-double-up').addClass('fa-angle-double-down');
+    }
+  });
+}
+
+var EVENTS = [postPreview, uploadImage, heightLimit, toggleFoldContent];
+EVENTS.forEach(function(evt){
+  document.addEventListener('turbolinks:load', evt);
+})
