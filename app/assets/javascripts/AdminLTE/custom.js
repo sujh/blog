@@ -80,7 +80,11 @@ function toggleFoldContent(){
   });
 }
 
-var EVENTS = [postPreview, uploadImage, heightLimit, toggleFoldContent];
-EVENTS.forEach(function(evt){
-  document.addEventListener('turbolinks:load', evt);
+function loadTagInput(){
+  $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
+}
+
+var HANDLERS = [postPreview, uploadImage, heightLimit, toggleFoldContent, loadTagInput];
+HANDLERS.forEach(function(handler){
+  document.addEventListener('turbolinks:load', handler);
 })
