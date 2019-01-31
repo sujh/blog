@@ -22,6 +22,11 @@
               <div id="pre-area" style="display: none"></div>
             </div>
             <%= hidden_field_tag(:post_draft_id) if @post.new_record? %>
+
+            <div class="form-group">
+              <%= f.label(:tags, '分类标签') %>
+              <%= f.text_field(:tags_str, class: 'form-control', data: { role: 'tagsinput' }) %>
+            </div>
           </div>
 
           <div class="box-footer">

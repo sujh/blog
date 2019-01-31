@@ -1,6 +1,11 @@
 <div class="box-body no-padding">
   <div class="mailbox-read-info">
     <h3><%= link_to(post.title, super_post_path(post)) %></h3>
+    <% post.tags.each do |tag| %>
+      <span class="label label-default cu-s-margin">
+        <%= link_to tag.value, super_tag_path(tag) %>
+      </span>
+    <% end %>
     <h5>
       <div class="mailbox-read-time">
         <%= post.updated_at.strftime('%Y-%m-%d %H:%M:%S') %>

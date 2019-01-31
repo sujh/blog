@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         post :preserve, on: :collection
       end
 
+      resources :tags, only: [:show]
       resource :admin, only: [:edit, :update]
     end
   end
