@@ -26,5 +26,13 @@ module Blog
       expires_in: 1.day
     }
 
+    config.before_configuration do
+      env_file = File.join(Rails.root, '.env')
+      File.open(env_file).each_line do |line|
+        k, v = line.chomp.split('=')
+        ENV[k] = v
+      end if File.exists?(env_file)
+    end
+
   end
 end

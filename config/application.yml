@@ -4,4 +4,7 @@ default: &default
   blog_name: 'Spike76'
 
 development:
- <<: *default
+  <<: *default
+
+production:
+  <<: *default

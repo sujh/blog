@@ -26,4 +26,6 @@ test:
 
 production:
   <<: *default
-  database: bolog
+  database: blog_production
+  username: root
+  password: <%= ENV.fetch("DB_PASS") %>
