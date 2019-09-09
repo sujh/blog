@@ -3,13 +3,15 @@ lock "~> 3.11.1"
 
 set :application, "my_blog"
 set :repo_url, "https://github.com/sujh/blog.git"
-
+set :keep_releases, 5
+set :keep_assets, 2
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
 set :deploy_to, -> { "~/deploy/#{fetch :application}" }
+set :log_level, :debug
 set :rvm_type, :user
 set :rvm_ruby_version, '2.4.2@rails5.2'
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -23,6 +25,7 @@ ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default value for :pty is false
 # set :pty, true
+set :puma_init_active_record, true
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml"
