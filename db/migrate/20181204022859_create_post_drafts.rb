@@ -3,7 +3,8 @@ class CreatePostDrafts < ActiveRecord::Migration[5.2]
     create_table :post_drafts do |t|
       t.string :title
       t.text :content
-      t.integer :post_id
+      t.references :post
+      t.references :admin
 
       t.timestamps
     end

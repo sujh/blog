@@ -5,7 +5,7 @@ module Super
     before_action :load_resource, only: [:show, :edit, :update, :destroy, :new]
 
     def index
-      @posts = Post.undeleted.order(id: 'desc').page(params[:page])
+      @posts = Post.order(id: 'desc').page(params[:page])
     end
 
     def create
@@ -41,7 +41,7 @@ module Super
     private
 
       def post_params
-        params.require(:post).permit(:title, :content, :tags_str)
+        params.require(:post).permit(:title, :content).merge(tags: params[:post][:tags].split(','))
       end
 
   end

@@ -1,7 +1,7 @@
 default: &default
   super_subdomain: 'super'
   default_subdomain: 'www'
-  blog_name: 'Spike76'
+  app_name: 'Spike76'
 
 development:
   <<: *default

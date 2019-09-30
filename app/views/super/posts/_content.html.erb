@@ -25,7 +25,10 @@
 
             <div class="form-group">
               <%= f.label(:tags, '分类标签') %>
-              <%= f.text_field(:tags_str, class: 'form-control', data: { role: 'tagsinput' }) %>
+              <%= f.fields_for :tags do |tf| %>
+                <%= tf.text_field :value %>
+              <% end %>
+              <%= f.text_field(:tags, value: @post.tags.join(','), class: 'form-control', data: { role: 'tagsinput' }) %>
             </div>
           </div>
 

@@ -2,7 +2,7 @@
   <section class="sidebar">
     <div class="user-panel">
       <div class="pull-left image">
-        <%= image_tag(current_admin.avatar.small.url, class: 'img-circle', alt: 'avatar') %>
+        <%= image_tag(current_admin.avatar.small.url, class: 'img-circle', alt: 'avatar') if current_admin.avatar.file %>
       </div>
 
       <div class="pull-left info">
@@ -30,7 +30,7 @@
       </li>
 
       <li class="<%= active_for(controller: 'admins') %>">
-        <%= link_to(edit_super_admin_path) do %>
+        <%= link_to(edit_super_admin_path(current_admin)) do %>
           <i class="fa fa-user"></i>
           <span>Profile</span>
         <% end %>

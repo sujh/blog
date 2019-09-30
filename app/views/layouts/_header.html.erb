@@ -1,11 +1,11 @@
 <header class="main-header">
   <a href="#" class="logo">
     <span class="logo-mini">
-      <b><%= Settings.blog_name.first %></b>
-      <%= Settings.blog_name[-2..-1] %>
+      <b><%= Rails.application.config_for(:application)['app_name'] %></b>
+      <%= Rails.application.config_for(:application)['app_name'][-2..-1] %>
     </span>
     <span class="logo-lg">
-      <b><%= Settings.blog_name %></b>
+      <b><%= Rails.application.config_for(:application)['app_name'] %></b>
     </span>
   </a>
   <nav class="navbar navbar-static-top" role="navigation">

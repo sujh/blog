@@ -2,7 +2,7 @@
   <div class="col-md-3">
     <div class="box box-primary">
       <div class="box-body box-profile">
-        <%= image_tag(@admin.avatar_url, class: 'profile-user-img img-responsive img-circle', alt: 'avatar') %>
+        <%= image_tag(@admin.avatar_url, class: 'profile-user-img img-responsive img-circle', alt: 'avatar') if @admin.avatar_url%>
         <h3 class="profile-username text-center">
           <%= @admin.name %>
         </h3>

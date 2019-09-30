@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  constraints subdomain: Settings.super_subdomain do
+  constraints subdomain: Rails.application.config_for(:application)['super_subdomain'] do
     namespace :super, path: nil do
       controller :sessions do
         get 'sign' => :new
@@ -12,17 +12,13 @@ Rails.application.routes.draw do
         get :preview, on: :collection
       end
 
-      resources :post_trashes, only: [:index, :destroy] do
-        post :renew, on: :member
-      end
-
       resources :post_drafts, only: [:index, :destroy, :edit] do
         post :publish, on: :member
         post :preserve, on: :collection
       end
 
       resources :tags, only: [:show]
-      resource :admin, only: [:edit, :update]
+      resources :admins, only: [:edit, :update]
     end
   end
 
