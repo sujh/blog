@@ -17,4 +17,13 @@ module ApplicationHelper
     end
   end
 
+  def avatar_image(admin, size = nil, options = {})
+    source = size ? admin.avatar.send(size).url : admin.avatar_url
+    if source
+      image_tag(source, options)
+    else
+      image_tag('default_avatar', options)
+    end
+  end
+
 end
