@@ -1,43 +1,33 @@
 class Post < ApplicationRecord
 
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  MAX_TAGS = 3
 
-  validates_presence_of :title, :content
+  include Elasticsearch::Model
+
+  after_commit(on: :create) { ElasticsearchIndexer.perform_async(Post, id, :index) }
+  after_commit(on: :update) { ElasticsearchIndexer.perform_async(Post, id, :update) }
+  after_destroy { ElasticsearchIndexer.perform_async(Post, id, :delete) }
+
+  validates :title, presence: true, length: { maximum: 20 }
+  validates :content, presence: true, length: { maximum: 20000 }
 
   has_one :draft, class_name: 'PostDraft', dependent: :destroy
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
 
-  accepts_nested_attributes_for :tags, limit: 4
+  accepts_nested_attributes_for :tags, limit: MAX_TAGS, allow_destroy: true, reject_if: :all_blank
 
-  #before_save :create_or_update_tags, if: ->{ (new_record? && tags.present?) || (!new_record? && self.tags_str_changed?) }
-
-  def as_indexed_json(options)
-    as_json(only: [:title, :content])
+  settings index: { number_of_shards: 1 } do
+    mapping dynamic: false do
+      indexes :title, type: :text
+      indexes :content, type: :text
+      indexes :admin_id, type: :long
+      indexes :is_public, type: :boolean
+    end
   end
 
-  private
-
-    def create_or_update_tags
-      ori_tags = String(tags_str_was).split(',').uniq
-      now_tags = tags_str.split(',').uniq
-      deleted_tags = ori_tags - now_tags
-      new_tags = now_tags - ori_tags
-
-      new_tags.each do |tag_value|
-        tag = Tag.find_by(value: tag_value)
-        if tag
-          self.tags << tag
-        else
-          self.tags.build(value: tag_value)
-        end
-      end
-
-      deleted_tags.each do |tag_value|
-        tag = Tag.find_by(value: tag_value)
-        self.tags.destroy(tag) if tag
-      end
-    end
+  def as_indexed_json(options)
+    as_json(only: [:title, :content, :admin_id, :is_public])
+  end
 
 end

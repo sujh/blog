@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  mount Sidekiq::Web => '/sidekiq'
   constraints subdomain: Rails.application.config_for(:application)['super_subdomain'] do
     namespace :super, path: nil do
       controller :sessions do

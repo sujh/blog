@@ -9,6 +9,9 @@ class Admin < ApplicationRecord
   validates_presence_of :name, :password
   validates :email, presence: true, uniqueness: true, format: { with: /\w+@\w+\.[a-z]+/ }
 
+  has_many :posts
+  has_many :drafts, class_name: 'PostDraft'
+
   class << self
 
     def generate_digest(passwd, salt)

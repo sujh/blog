@@ -5,7 +5,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.text :content
       t.integer :view_counts, default: 0, null: false
       t.boolean :is_public, null: false, default: true
-      t.references :admin
+      t.references :admin, null: false
       t.timestamps
     end
   end

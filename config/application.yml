@@ -2,6 +2,10 @@ default: &default
   super_subdomain: 'super'
   default_subdomain: 'www'
   app_name: 'Spike76'
+  redis:
+    sidekiq_db: 1
+  sidekiq:
+    host: '127.0.0.1:9200'
 
 development:
   <<: *default

@@ -72,11 +72,30 @@ function toggleFoldContent(){
   });
 }
 
+function limitNestedFields(){
+  $('#tags').on('cocoon:after-insert', function() {
+    check_to_hide_or_show_add_link();
+  });
+
+  $('#tags').on('cocoon:after-remove', function() {
+    check_to_hide_or_show_add_link();
+  });
+
+  check_to_hide_or_show_add_link();
+  function check_to_hide_or_show_add_link() {
+    if ($('#tags .nested-fields').length == <%= Post::MAX_TAGS %>) {
+      $('a.add-tag').hide();
+    } else {
+      $('a.add-tag').show();
+    }
+  }
+}
+
 function loadTagInput(){
   $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
 }
 
-var HANDLERS = [postPreview, uploadImage, heightLimit, toggleFoldContent, loadTagInput];
+var HANDLERS = [postPreview, uploadImage, heightLimit, toggleFoldContent, loadTagInput, limitNestedFields];
 HANDLERS.forEach(function(handler){
   document.addEventListener('turbolinks:load', handler);
 })

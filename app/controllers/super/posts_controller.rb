@@ -8,8 +8,12 @@ module Super
       @posts = Post.order(id: 'desc').page(params[:page])
     end
 
+    def new
+      @post.tags.build
+    end
+
     def create
-      @post = Post.new(post_params)
+      @post = current_admin.posts.new(post_params)
       if @post.save
         PostDraft.find_by(id: params[:post_draft_id]).destroy if params[:post_draft_id].present?
         redirect_to super_posts_path, notice: 'Success'
@@ -30,7 +34,7 @@ module Super
     end
 
     def destroy
-      @post.act_as_deleted
+      @post.destroy
       redirect_to super_posts_path, notice: 'Success'
     end
 
@@ -41,7 +45,7 @@ module Super
     private
 
       def post_params
-        params.require(:post).permit(:title, :content).merge(tags: params[:post][:tags].split(','))
+        params.require(:post).permit(:title, :content, tags_attributes: [:id, :value, :_destroy])
       end
 
   end

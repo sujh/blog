@@ -14,21 +14,21 @@
         <%= form_for([:super, @post], html: { id: 'record-form' }) do |f| %>
           <div class="box-body">
             <div class="form-group">
-              <%= f.text_field(:title, class: 'form-control', placeholder: 'Title:', required: true, id: 'record-title') %>
+              <%= f.text_field(:title, class: 'form-control', placeholder: '标题:', required: true, id: 'record-title', maxlength: 20) %>
             </div>
 
             <div class="form-group">
-              <%= f.text_area(:content, class: 'form-control', id: 'record-content', placeholder: 'Content:', rows: 20, required: true) %>
+              <%= f.text_area(:content, class: 'form-control', id: 'record-content', placeholder: '内容:', rows: 20, required: true) %>
               <div id="pre-area" style="display: none"></div>
             </div>
             <%= hidden_field_tag(:post_draft_id) if @post.new_record? %>
-
-            <div class="form-group">
-              <%= f.label(:tags, '分类标签') %>
-              <%= f.fields_for :tags do |tf| %>
-                <%= tf.text_field :value %>
-              <% end %>
-              <%= f.text_field(:tags, value: @post.tags.join(','), class: 'form-control', data: { role: 'tagsinput' }) %>
+            <div id="tags">
+              <div class="form-group">
+                <%= f.fields_for :tags do |tf| %>
+                  <%= render partial: 'tag_fields', locals: { f: tf } %>
+                  <%= link_to_add_association '继续添加标签', f, :tags, { class: 'btn btn-primary btn-sm add-tag' }%>
+                <% end %>
+              </div>
             </div>
           </div>
 

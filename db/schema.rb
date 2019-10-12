@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_01_28_031345) do
 
-  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 20, null: false
     t.string "email", limit: 40, null: false
     t.string "password_salted", null: false
@@ -28,36 +28,36 @@ ActiveRecord::Schema.define(version: 2019_01_28_031345) do
     t.index ["name"], name: "index_admins_on_name", unique: true
   end
 
-  create_table "post_drafts", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "post_drafts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.bigint "post_id"
-    t.bigint "admin_id"
+    t.bigint "post_id", null: false
+    t.bigint "admin_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_id"], name: "index_post_drafts_on_admin_id"
     t.index ["post_id"], name: "index_post_drafts_on_post_id"
   end
 
-  create_table "post_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.bigint "tag_id"
-    t.bigint "post_id"
+  create_table "post_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "tag_id", null: false
+    t.bigint "post_id", null: false
     t.index ["post_id"], name: "index_post_tags_on_post_id"
     t.index ["tag_id"], name: "index_post_tags_on_tag_id"
   end
 
-  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.integer "view_counts", default: 0, null: false
     t.boolean "is_public", default: true, null: false
-    t.bigint "admin_id"
+    t.bigint "admin_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_id"], name: "index_posts_on_admin_id"
   end
 
-  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "value", null: false
     t.integer "posts_count", default: 0, null: false
     t.datetime "created_at", null: false

@@ -1,0 +1,8 @@
+<div class="nested-fields">
+  <div class="field form-group input-group input-group-sm">
+    <%= f.text_field :value, placeholder: '标签:', class: 'form-control', maxlength: 20 %>
+    <span class="input-group-btn">
+      <%= link_to_remove_association '删除', f, class: 'btn btn-flat btn-warning' %>
+    </span>
+  </div>
+</div>

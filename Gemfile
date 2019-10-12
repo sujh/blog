@@ -48,8 +48,12 @@ gem 'redis-rails'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 
-gem 'elasticsearch-model', '~> 2.0'
-gem 'elasticsearch-rails', '~> 2.0'
+gem 'elasticsearch', '~> 6.0'
+gem 'elasticsearch-model', '~> 6.0'
+gem 'elasticsearch-rails', '~> 6.0'
+gem 'sidekiq', '~>5.2'
+
+gem 'cocoon', '>=1.2.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
