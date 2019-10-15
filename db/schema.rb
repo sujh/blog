@@ -39,13 +39,6 @@ ActiveRecord::Schema.define(version: 2019_01_28_031345) do
     t.index ["post_id"], name: "index_post_drafts_on_post_id"
   end
 
-  create_table "post_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "tag_id", null: false
-    t.bigint "post_id", null: false
-    t.index ["post_id"], name: "index_post_tags_on_post_id"
-    t.index ["tag_id"], name: "index_post_tags_on_tag_id"
-  end
-
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -58,11 +51,12 @@ ActiveRecord::Schema.define(version: 2019_01_28_031345) do
   end
 
   create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "value", null: false
-    t.integer "posts_count", default: 0, null: false
+    t.string "value", limit: 20, null: false
+    t.bigint "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["value"], name: "index_tags_on_value", unique: true
+    t.index ["post_id"], name: "index_tags_on_post_id"
+    t.index ["value"], name: "index_tags_on_value"
   end
 
 end

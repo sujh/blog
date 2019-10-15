@@ -33,17 +33,15 @@
 
     <div class="box-body no-padding">
       <ul class="nav nav-pills nav-stacked">
-        <% Tag.all.each do |tag| %>
-          <% if tag.posts_count != 0 %>
-            <li class="<%= active_for(path: super_tag_path(tag)) %>">
-              <%= link_to(super_tag_path(tag)) do %>
-                <%= tag.value %>
-                <span class="label label-primary pull-right">
-                  <%= tag.posts_count %>
-                </span>
-              <% end %>
-            </li>
-          <% end %>
+        <% current_admin.tag_group.each do |value, count| %>
+          <li class="<%= active_for(path: super_posts_path(value: value)) %>">
+            <%= link_to(super_posts_path(value: value)) do %>
+              <%= value %>
+              <span class="label label-primary pull-right">
+                <%= count %>
+              </span>
+            <% end %>
+          </li>
         <% end %>
       </ul>
     </div>

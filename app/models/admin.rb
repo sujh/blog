@@ -28,6 +28,10 @@ class Admin < ApplicationRecord
     Array(skills&.split(','))
   end
 
+  def tag_group
+    posts.joins(:tags).group('tags.value').count
+  end
+
   private
 
     def salt_password

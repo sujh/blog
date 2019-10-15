@@ -1,8 +1,7 @@
 class Tag < ApplicationRecord
 
-  has_many :post_tags
-  has_many :posts, through: :post_tags
+  belongs_to :post
 
-  validates :value, length: { maximum: 20 }
+  validates :value, length: { maximum: 10 }
 
 end

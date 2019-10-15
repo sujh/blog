@@ -22,7 +22,7 @@
     <% end %>
 
     <ul class="sidebar-menu tree" data-widget="tree">
-      <li class="<%= active_for(controller: %w[posts post_trashes post_drafts]) %>">
+      <li class="<%= active_for(controller: %w[posts post_trashes post_drafts], suppress_check_params: true) %>">
         <%= link_to(super_posts_path) do %>
           <i class="fa fa-book"></i>
           <span>Posts</span>

@@ -12,8 +12,9 @@ class Post < ApplicationRecord
   validates :content, presence: true, length: { maximum: 20000 }
 
   has_one :draft, class_name: 'PostDraft', dependent: :destroy
-  has_many :post_tags, dependent: :destroy
-  has_many :tags, through: :post_tags
+  has_many :tags, dependent: :destroy
+
+  scope :with_tag, ->(value) { joins(:tags).where('tags.value = ?', value) }
 
   accepts_nested_attributes_for :tags, limit: MAX_TAGS, allow_destroy: true, reject_if: :all_blank
 

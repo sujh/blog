@@ -5,7 +5,12 @@ module Super
     before_action :load_resource, only: [:show, :edit, :update, :destroy, :new]
 
     def index
-      @posts = Post.order(id: 'desc').page(params[:page])
+      @posts =
+        if params[:value].present?
+          current_admin.posts.with_tag(params[:value])
+        else
+          current_admin.posts
+        end.order(id: 'desc').page(params[:page])
     end
 
     def new

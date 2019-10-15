@@ -3,7 +3,7 @@
     <h3><%= link_to(post.title, super_post_path(post)) %></h3>
     <% post.tags.each do |tag| %>
       <span class="label label-default cu-s-margin">
-        <%= link_to tag.value, super_tag_path(tag) %>
+        <%= link_to tag.value, super_posts_path(value: tag.value) %>
       </span>
     <% end %>
     <h5>
