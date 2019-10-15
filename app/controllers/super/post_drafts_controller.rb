@@ -5,7 +5,7 @@ module Super
     before_action only: [:edit, :destroy, :publish] { load_resource instance_name: 'draft' }
 
     def index
-      @drafts = PostDraft.order('id desc').page(params[:page])
+      @drafts = current_admin.drafts.order('id desc').page(params[:page])
     end
 
     def preserve
@@ -20,15 +20,14 @@ module Super
           code, msg, data = 100, 'Done', { post_draft_id: @draft.id } if @draft.update(draft_params)
         else
           @draft = PostDraft.new(draft_params)
-          code, msg, data = 100, 'Done', { post_draft_id: @draft.id } if @draft.save
+          code, msg, data = 100, 'Done', { post_draft_id: @draft.id } if current_admin.drafts.create(draft_params).persisted?
         end
       end
       render json: { code: code, msg: msg, data: data }
     end
 
     def publish
-      if publish_to_post
-        @draft.destroy
+      if @draft.publish
         redirect_to super_posts_path, notice: 'Success'
       else
         flash.now[:alert] = "Failed: #{@post.full_error_messages}"
@@ -50,11 +49,6 @@ module Super
           else
             params.require(:post_draft).permit(:title, :content)
           end
-      end
-
-      def publish_to_post
-        @post = @draft.post
-        @post ? @post.update(draft_params) : @draft.create_post(draft_params).persisted?
       end
 
   end
