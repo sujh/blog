@@ -7,9 +7,10 @@ module Super
     def index
       @posts =
         if params[:value].present?
-          current_admin.posts.with_tag(params[:value])
+          ids = current_admin.posts.with_tag(params[:value]).pluck(:id)
+          Post.where(id: ids).includes(:tags)
         else
-          current_admin.posts
+          current_admin.posts.includes(:tags)
         end.order(id: 'desc').page(params[:page])
     end
 
