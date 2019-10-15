@@ -6,21 +6,19 @@
       </div>
     <% else %>
       <% @hits.each_with_hit do |record, hit| %>
-        <% unless record.deleted_at? %>
-          <div class="box-body no-padding">
-            <div class="mailbox-read-info">
-              <% title = hit.highlight.title&.first || hit.title %>
-              <h4><%= link_to(raw(title), super_post_path(record)) %></h4>
-              <div class="mailbox-read-time">
-                <%= record.updated_at.strftime('%Y-%m-%d') %>
-              </div>
+        <div class="box-body no-padding">
+          <div class="mailbox-read-info">
+            <% title = hit.highlight.title&.first || hit.title %>
+            <h4><%= link_to(raw(title), super_post_path(record)) %></h4>
+            <div class="mailbox-read-time">
+              <%= record.updated_at.strftime('%Y-%m-%d') %>
             </div>
-            <div class="mailbox-read-message">
-              <%= raw hit.highlight.content&.first %>
-            </div>
-            <br>
           </div>
-        <% end %>
+          <div class="mailbox-read-message">
+            <%= raw hit.highlight.content&.first %>
+          </div>
+          <br>
+        </div>
       <% end %>
       <%= paginate @hits %>
     <% end %>
