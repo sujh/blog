@@ -6,7 +6,8 @@ class Admin < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader
 
-  validates_presence_of :name, :password
+  validates :name, presence: true, uniqueness: true
+  validates :password, presence: true, length: 3..20, on: :create
   validates :email, presence: true, uniqueness: true, format: { with: /\w+@\w+\.[a-z]+/ }
 
   has_many :posts
