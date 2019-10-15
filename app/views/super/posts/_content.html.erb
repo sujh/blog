@@ -23,11 +23,11 @@
             </div>
             <%= hidden_field_tag(:post_draft_id) if @post.new_record? %>
             <div id="tags">
-              <div class="form-group">
-                <%= f.fields_for :tags do |tf| %>
-                  <%= render partial: 'tag_fields', locals: { f: tf } %>
-                  <%= link_to_add_association '继续添加标签', f, :tags, { class: 'btn btn-primary btn-sm add-tag' }%>
-                <% end %>
+              <%= f.fields_for :tags do |tf| %>
+                <%= render partial: 'tag_fields', locals: { f: tf } %>
+              <% end %>
+              <div class="links">
+                <%= link_to_add_association '继续添加标签', f, :tags, { class: 'btn btn-primary btn-sm add-tag' }%>
               </div>
             </div>
           </div>
