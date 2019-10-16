@@ -17,7 +17,7 @@
 
   <body class="skin-blue sidebar-mini <%= controller_name %> <%= action_name %>">
     <div class="wrapper" style="height: auto; min-height: 100%">
-      <div style="position:relative; z-index: 1000">
+      <div style="position:absolute; width: 100%; z-index: 2000">
         <% if flash[:notice] %>
           <div class="alert alert-success alert-dismissible">
             <%= button_tag('x', class: 'close', 'aria-hidden' => 'true', data: { dismiss: 'alert' }) %>
