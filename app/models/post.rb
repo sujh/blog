@@ -12,6 +12,7 @@ class Post < ApplicationRecord
   validates :content, presence: true, length: { maximum: 20000 }
 
   has_one :draft, class_name: 'PostDraft', dependent: :destroy
+  belongs_to :admin
   has_many :tags, dependent: :destroy
 
   scope :with_tag, ->(value) { joins(:tags).where('tags.value = ?', value) }

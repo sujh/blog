@@ -1,6 +1,6 @@
 module Super
 
-  class SessionsController < ApplicationController
+  class SessionsController < Super::ApplicationController
 
     layout 'login'
 

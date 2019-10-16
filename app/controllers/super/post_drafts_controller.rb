@@ -1,6 +1,6 @@
 module Super
 
-  class PostDraftsController < ApplicationController
+  class PostDraftsController < Super::ApplicationController
 
     before_action only: [:edit, :destroy, :publish] { load_resource instance_name: 'draft' }
 
@@ -12,21 +12,22 @@ module Super
       draft_id = draft_params.extract!(:draft_id)[:draft_id]
       code, msg, data = -1, 'fail', {}
       if draft_id.present?
-        @draft = PostDraft.find(draft_id)
-        code, msg, data = 100, 'Done', { post_draft_id: draft_id } if @draft.update(draft_params)
+        @draft = authorize PostDraft.find(draft_id)
+        code, msg, data = 100, 'Done', { post_draft_id: @draft.id } if @draft.update(draft_params)
       else
-        @draft = PostDraft.find_by(post_id: params[:post_id])
-        if @draft
+        if params[:post_id].present?
+          @draft = authorize PostDraft.find_by(post_id: params[:post_id])
           code, msg, data = 100, 'Done', { post_draft_id: @draft.id } if @draft.update(draft_params)
         else
-          @draft = PostDraft.new(draft_params)
-          code, msg, data = 100, 'Done', { post_draft_id: @draft.id } if current_admin.drafts.create(draft_params).persisted?
+          @draft = authorize current_admin.drafts.build(draft_params)
+          code, msg, data = 100, 'Done', { post_draft_id: @draft.id } if @draft.save
         end
       end
       render json: { code: code, msg: msg, data: data }
     end
 
     def publish
+      authorize @draft
       if @draft.publish
         redirect_to super_posts_path, notice: 'Success'
       else
@@ -36,6 +37,7 @@ module Super
     end
 
     def destroy
+      authorize @draft
       @draft.destroy
       redirect_to super_post_drafts_path, notice: 'Success'
     end

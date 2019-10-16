@@ -54,6 +54,7 @@ gem 'elasticsearch-rails', '~> 6.0'
 gem 'sidekiq', '~>5.2'
 
 gem 'cocoon', '>=1.2.0'
+gem 'pundit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

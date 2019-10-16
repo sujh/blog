@@ -10,8 +10,8 @@ class Admin < ApplicationRecord
   validates :password, presence: true, length: 3..20, on: :create
   validates :email, presence: true, uniqueness: true, format: { with: /\w+@\w+\.[a-z]+/ }
 
-  has_many :posts
-  has_many :drafts, class_name: 'PostDraft'
+  has_many :posts, dependent: :destroy
+  has_many :drafts, class_name: 'PostDraft', dependent: :destroy
 
   class << self
 

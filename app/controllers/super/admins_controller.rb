@@ -1,15 +1,15 @@
 module Super
 
-  class AdminsController < ApplicationController
+  class AdminsController < Super::ApplicationController
 
     def edit
-      @admin = current_admin
+      @admin = authorize current_admin
     end
 
     def update
-      @admin = current_admin
+      @admin = authorize current_admin
       if @admin.update(admin_params)
-        redirect_to edit_super_admin_path, notice: 'Successs'
+        redirect_to edit_super_admin_path, notice: 'Success'
       else
         flash.now[:alert] = "Failed: #{@admin.full_error_messages}"
         render :edit
