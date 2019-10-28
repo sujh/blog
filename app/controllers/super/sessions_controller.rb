@@ -24,6 +24,7 @@ module Super
     private
 
       def sign_in(id)
+        reset_session
         @session.save(id)
         redirect_to @session[:referer] || super_posts_path
         @session.delete(:referer)
