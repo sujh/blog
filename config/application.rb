@@ -17,14 +17,16 @@ module Blog
     # the framework and any gems in your application.
     config.time_zone = 'Beijing'
     config.active_record.default_timezone = :local
-    config.cache_store = :redis_store, {
+    config.cache_store = :redis_cache_store, {
       host: 'localhost',
       port: 6379,
       db: 0,
-      namespace: '_blog'
-    }, {
-      expires_in: 1.day
+      namespace: '_blog',
+      compress: true,
+      expires_in: 7.days
     }
+
+    config.session_store :cache_store, key: '_blog_session'
 
     config.before_configuration do
       env_file = File.join(Rails.root, '.env')

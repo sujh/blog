@@ -4,6 +4,8 @@ module Super
 
     layout 'login'
 
+    before_action :init_session, only: [:create, :destroy]
+
     def create
       admin = Admin.find_by(name: params[:name])
       if admin&.authenticated?(params[:password])
@@ -15,16 +17,20 @@ module Super
     end
 
     def destroy
-      session.destroy
+      @session.destroy
       redirect_to super_sign_path
     end
 
     private
 
       def sign_in(id)
-        session[:admin_id] = id
-        redirect_to session[:referer] || super_posts_path
-        session.delete(:referer)
+        @session.save(id)
+        redirect_to @session[:referer] || super_posts_path
+        @session.delete(:referer)
+      end
+
+      def init_session
+        @session = Session.new(session)
       end
 
   end

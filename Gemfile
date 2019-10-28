@@ -42,8 +42,8 @@ gem 'redcarpet'
 gem 'kaminari'
 
 gem 'redis'
-gem 'redis-namespace'
-gem 'redis-rails'
+#gem 'redis-namespace'
+#gem 'redis-rails'
 
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
@@ -55,6 +55,7 @@ gem 'sidekiq', '~>5.2'
 
 gem 'cocoon', '>=1.2.0'
 gem 'pundit'
+gem 'connection_pool'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
