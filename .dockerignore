@@ -1,0 +1,13 @@
+data/
+log/
+tmp/
+public/assets/
+public/uploads/
+spec/
+test/
+
+Dockerfile
+.ruby-version
+.rvmrc
+.idea/
+.byebug_history

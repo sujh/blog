@@ -3,9 +3,10 @@ default: &default
   default_subdomain: 'www'
   app_name: 'Spike76'
   redis:
+    host: redis
     sidekiq_db: 1
-  sidekiq:
-    host: '127.0.0.1:9200'
+  elasticsearch:
+    host: elasticsearch
 
 development:
   <<: *default

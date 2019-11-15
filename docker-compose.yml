@@ -1,0 +1,41 @@
+version: '2'
+services:
+  web:
+    container_name: rails
+    build: /Users/sujh/Workspace/blog #use yours
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+      - redis
+  db:
+    container_name: mysql
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=${pass} #use yours
+      - MYSQL_DATABASE=blog
+    volumes:
+      - mysqlDataVolume:/var/lib/mysql
+  nginx:
+    container_name: nginx
+    image: nginx
+    volumes: 
+      - nginxConfigVolume:/etc/nginx/conf.d
+    ports: 
+      - '80:80'
+    depends_on:
+      - web
+  redis:
+    container_name: redis
+    image: redis:3.2.8-alpine
+    volumes:
+      - redisDataVolume:/data
+
+volumes:
+  nginxConfigVolume:
+    external: false
+  mysqlDataVolume:
+    external: false
+  redisDataVolume:
+    external: false
